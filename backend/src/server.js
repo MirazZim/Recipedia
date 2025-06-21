@@ -57,6 +57,23 @@ app.delete("/api/favorites/:userId/:recipeId", async (req, res) => {
     }
 })
 
+app.get("/api/favorites/:userId", async (req, res) => {
+    try {
+        const {userId} = req.params;
+
+        const favorites = await db.select()
+        .from(favoriteTable)
+        .where(
+            eq(favoriteTable.userId, userId)
+        );
+        
+        return res.status(200).json(favorites);
+    } catch (error) {
+        console.error("Error fetching favorites:", error);
+        return res.status(500).json({message: "Internal server error"});
+    }
+})
+
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 });
