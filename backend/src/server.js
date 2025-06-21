@@ -3,9 +3,13 @@ import { ENV } from "./config/env.js";
 import { db } from "./config/db.js";
 import { favoriteTable } from "./db/schema.js";
 import { and, eq } from "drizzle-orm";
+import cronJob from "./config/cron.js";
 
 const app = express();
 const PORT = ENV.PORT;
+
+// Start the cron job
+if (process.env.NODE_ENV === "production") cronJob.start();
 
 app.use(express.json());
 
@@ -66,7 +70,7 @@ app.get("/api/favorites/:userId", async (req, res) => {
         .where(
             eq(favoriteTable.userId, userId)
         );
-        
+    
         return res.status(200).json(favorites);
     } catch (error) {
         console.error("Error fetching favorites:", error);
