@@ -5,6 +5,7 @@ import { useSignUp } from '@clerk/clerk-expo';
 import { authStyles } from '../../assets/styles/auth.styles';
 import { COLORS } from '../../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
+import VerifyEmail from './verify-email';
 
 const SignUpScreen = () => {
   const router = useRouter();
@@ -38,12 +39,7 @@ const SignUpScreen = () => {
   };
 
   if (pendingVerification)
-    return (
-      <View style={authStyles.container}>
-        <Text style={authStyles.title}>Check your email for a verification code</Text>
-      </View>
-    );
-
+    return <VerifyEmail email={email} onBack={() => setPendingVerification(false)} />;
 
   return (
     <View style={authStyles.container}>
