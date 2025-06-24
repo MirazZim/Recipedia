@@ -98,4 +98,4 @@ const coffeeTheme = {
   };
   
   // 👇 change this to switch theme
-  export const COLORS = THEMES.ocean;
+  export const COLORS = THEMES.midnight;
