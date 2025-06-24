@@ -76,7 +76,7 @@ const HomeScreen = () => {
     }
   };
 
-  // Handle category select
+  // Handle category select. behind the scene it will load the data for the selected category and set it to the state as it is selected and load the data for the selected category
   const handleCategorySelect = async (category) => {
     setSelectedCategory(category);
     await loadCategoryData(category);
